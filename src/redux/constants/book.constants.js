@@ -1,0 +1,4 @@
+// book.constants.js
+export const GET_BOOKS_REQUEST = "BOOK.GET_BOOKS_REQUEST";
+export const GET_BOOKS_SUCCESS = "BOOK.GET_BOOKS_SUCCESS";
+export const GET_BOOKS_FAILURE = "BOOK.GET_BOOKS_FAILURE";
