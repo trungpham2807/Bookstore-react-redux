@@ -4,48 +4,29 @@ import { ClipLoader } from "react-spinners";
 import { useParams } from "react-router-dom";
 import { toast } from "react-toastify";
 import api from "../apiService";
+import { useDispatch, useSelector } from "react-redux";
+import { bookActions } from "../redux/actions/book.actions";
+import { cartActions } from "../redux/actions/cart.actions";
 
 const BACKEND_API = process.env.REACT_APP_BACKEND_API;
 
 const BookDetailPage = () => {
-  const [loading, setLoading] = useState(false);
-  const [book, setBook] = useState(null);
-  const [addingBook, setAddingBook] = useState(false);
   const params = useParams();
   const bookId = params.id;
+  const book = useSelector((state) => state.books.selectedBook);
+  const loading = useSelector((state) => state.books.loading);
+  const dispatch = useDispatch();
 
   const addToReadingList = (book) => {
-    setAddingBook(book);
+    dispatch(bookActions.addToFavorite(book));
+  };
+  const addToCart = () => {
+    dispatch(cartActions.addToCart(book));
   };
 
   useEffect(() => {
-    const postData = async () => {
-      if (!addingBook) return;
-      setLoading(true);
-      try {
-        await api.post(`/favorites`, addingBook);
-        toast.success("The book has been added to the reading list!");
-      } catch (error) {
-        toast.error(error.message);
-      }
-      setLoading(false);
-    };
-    postData();
-  }, [addingBook]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const res = await api.get(`/books/${bookId}`);
-        setBook(res.data);
-      } catch (error) {
-        toast.error(error.message);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [bookId]);
+    dispatch(bookActions.selectBook(bookId));
+  }, [bookId, dispatch]);
 
   return (
     <Container>
@@ -85,6 +66,9 @@ const BookDetailPage = () => {
                 </div>
                 <Button onClick={() => addToReadingList(book)}>
                   Add to Reading List
+                </Button>{" "}
+                <Button variant="success" onClick={() => addToCart()}>
+                  Add to cart
                 </Button>{" "}
               </>
             )}

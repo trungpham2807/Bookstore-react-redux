@@ -5,6 +5,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import PublicNavbar from "./components/PublicNavbar";
 import HomePage from "./pages/HomePage";
 import ReadingPage from "./pages/ReadingPage";
+import CartPage from "./pages/CartPage";
 import NotFoundPage from "./pages/NotFoundPage";
 import BookDetailPage from "./pages/BookDetailPage";
 import AlertMsg from "./components/AlertMsg";
@@ -17,6 +18,7 @@ function App() {
       <Switch>
         <Route exact path="/books/:id" component={BookDetailPage} />
         <Route exact path="/reading" component={ReadingPage} />
+        <Route exact path="/cart" component={CartPage} />
         <Route exact path="/" component={HomePage} />
         <Route component={NotFoundPage} />
       </Switch>

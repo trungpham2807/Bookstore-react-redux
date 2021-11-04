@@ -19,9 +19,9 @@ const PublicNavbar = () => {
         </Nav.Link>
       </Nav>
       <Nav>
-        <a href="#your_github_repo_link" target="_blank">
+        <Nav.Link as={NavLink} to="/cart">
           <img src={githubIco} alt="Github" width="32px" />
-        </a>
+      </Nav.Link>      
       </Nav>
     </Navbar>
   );
