@@ -14,4 +14,3 @@ $ npm install
 
 -   Run `npm start` to start the React app.
 
-## Author: dhminh1024
